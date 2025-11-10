@@ -1,8 +1,13 @@
 // src/services/api.mjs
 import axios from "axios";
 
+
+const BASE_URL = import.meta.env.NODE_ENV === "production" 
+  ? "https://social-post-app-backend.onrender.com/api"
+  : "http://192.168.31.17:5000/api";
+
 const API = axios.create({
-  baseURL: "http://192.168.31.17:5000/api", // backend base url
+  baseURL: BASE_URL , // backend base url
   withCredentials: true,
 });
 
