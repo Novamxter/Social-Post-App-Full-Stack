@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../../components/Navbar";
 import PostBox from "../../components/PostBox";
 import PostCard from "../../components/PostCard";
@@ -25,6 +25,7 @@ function HomePage() {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [posting, setPosting] = useState(false);
+  const [socket, setSocket ] = useState(null)
 
   const username = token ? jwtDecode(token)?.username : null;
 
@@ -51,7 +52,7 @@ function HomePage() {
 
     const socket = socketRef.current;
     window.socket = socket;
-
+    setSocket(socket)
     console.log("Connected?", socket.connected);
 
     return () => {
