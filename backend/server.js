@@ -23,7 +23,7 @@ app.set("trust proxy", 1);
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigin, // replace '*' with your frontend URL
+    origin: "https://social-post-app-full-stack.vercel.app", // replace '*' with your frontend URL
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -36,10 +36,11 @@ app.use((req, res, next) => {
   req.io = io;
   next();
 });
+app.options("*", cors());
 
 app.use(
   cors({
-    origin: allowedOrigin, // 👈 exact origin of your frontend
+    origin: "https://social-post-app-full-stack.vercel.app", // 👈 exact origin of your frontend
     credentials: true, // 👈 allow cookies/auth headers
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
