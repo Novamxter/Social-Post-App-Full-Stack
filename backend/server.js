@@ -19,6 +19,13 @@ const allowedOrigin =
 const app = express();
 app.set("trust proxy", 1);
 
+app.use(
+  cors({
+    origin: "https://social-post-app-full-stack.vercel.app", // 👈 exact origin of your frontend
+    credentials: true, // 👈 allow cookies/auth headers
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -40,13 +47,7 @@ app.use((req, res, next) => {
 // app.options("/(.*)", cors());
 
 
-app.use(
-  cors({
-    origin: "https://social-post-app-full-stack.vercel.app", // 👈 exact origin of your frontend
-    credentials: true, // 👈 allow cookies/auth headers
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
+
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
