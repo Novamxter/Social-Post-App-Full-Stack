@@ -32,21 +32,21 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", "true");
 
   if (req.method === "OPTIONS") {
-    return res.sendStatus(204); // ✅ reply with success for preflight
+    return res.status(200).send("OK") // ✅ reply with success for preflight
   }
   next();
 });
 
-app.use(
-  cors({
-    origin: allowedOrigins, // 👈 exact origin of your frontend
-    credentials: true, // 👈 allow cookies/auth headers
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    allowedHeaders: ["Content-Type", "Authorization"],
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  })
-);
+// app.use(
+//   cors({
+//     origin: allowedOrigins, // 👈 exact origin of your frontend
+//     credentials: true, // 👈 allow cookies/auth headers
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     preflightContinue: false,
+//     optionsSuccessStatus: 204,
+//   })
+// );
 
 
 app.use(express.json());
