@@ -13,7 +13,7 @@ const socket = io(
     ? "https://social-post-app-backend.onrender.com"
     : "http://192.168.31.17:5000",
   {
-    transports: ["websocket"],
+    transports: ["polling"],
     withCredentials: true,
   }
 );
