@@ -7,7 +7,7 @@ export const BASE_URL = import.meta.env.MODE === "production"
   : "http://192.168.31.17:5000/api";
 
 const API = axios.create({
-  baseURL: BASE_URL , // backend base url
+  baseURL: "https://social-post-app-backend.onrender.com/api" , // backend base url
   withCredentials: true,
 });
 

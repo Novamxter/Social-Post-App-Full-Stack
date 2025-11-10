@@ -21,7 +21,7 @@ app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: "http://192.168.31.17:5173", // 👈 exact origin of your frontend
+    origin: "https://social-post-app-full-stack.vercel.app", // 👈 exact origin of your frontend
     credentials: true, // 👈 allow cookies/auth headers
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -34,7 +34,7 @@ app.use(express.json());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://192.168.31.17:5173", // replace '*' with your frontend URL
+    origin: "https://social-post-app-full-stack.vercel.app", // replace '*' with your frontend URL
     methods: ["GET", "POST"],
     credentials: true,
   },

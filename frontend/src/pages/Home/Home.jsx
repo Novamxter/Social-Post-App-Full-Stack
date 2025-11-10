@@ -18,14 +18,13 @@ import "../../styles/DashBoard.css";
 //   }
 // );
 
-
 function HomePage() {
   const socketRef = useRef(null);
 
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [posting, setPosting] = useState(false);
-  const [socket, setSocket ] = useState(null)
+  const [socket, setSocket] = useState(null);
 
   const username = token ? jwtDecode(token)?.username : null;
 
@@ -37,22 +36,19 @@ function HomePage() {
       console.error("Error fetching posts:", err);
     }
   };
-
+  // import.meta.env.MODE === "production"
+  //         ? "https://social-post-app-backend.onrender.com"
+  //         : "http://192.168.31.17:5000",
   useEffect(() => {
     // ✅ Initialize socket only when component loads in browser
-    socketRef.current = io(
-      import.meta.env.MODE === "production"
-        ? "https://social-post-app-backend.onrender.com"
-        : "http://192.168.31.17:5000",
-      {
-        transports: ["websocket", "polling"],
-        withCredentials: true,
-      }
-    );
+    socketRef.current = io("https://social-post-app-backend.onrender.com", {
+      transports: ["websocket", "polling"],
+      withCredentials: true,
+    });
 
     const socket = socketRef.current;
     window.socket = socket;
-    setSocket(socket)
+    setSocket(socket);
     console.log("Connected?", socket.connected);
 
     return () => {
