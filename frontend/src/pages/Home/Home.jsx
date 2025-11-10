@@ -8,18 +8,20 @@ import { getAllPosts } from "../../services/api.mjs";
 import { jwtDecode } from "jwt-decode";
 import "../../styles/DashBoard.css";
 
-const socket = io(
-  import.meta.env.MODE === "production"
-    ? "https://social-post-app-backend.onrender.com"
-    : "http://192.168.31.17:5000",
-  {
-    transports: ["websocket","polling"],
-    withCredentials: true,
-  }
-);
-window.socket = socket 
+// const socket = io(
+//   import.meta.env.MODE === "production"
+//     ? "https://social-post-app-backend.onrender.com"
+//     : "http://192.168.31.17:5000",
+//   {
+//     transports: ["websocket", "polling"],
+//     withCredentials: true,
+//   }
+// );
+
 
 function HomePage() {
+  const socketRef = useRef(null);
+
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [posting, setPosting] = useState(false);
@@ -36,7 +38,32 @@ function HomePage() {
   };
 
   useEffect(() => {
+    // ✅ Initialize socket only when component loads in browser
+    socketRef.current = io(
+      import.meta.env.MODE === "production"
+        ? "https://social-post-app-backend.onrender.com"
+        : "http://192.168.31.17:5000",
+      {
+        transports: ["websocket", "polling"],
+        withCredentials: true,
+      }
+    );
+
+    const socket = socketRef.current;
+    window.socket = socket;
+
+    console.log("Connected?", socket.connected);
+
+    return () => {
+      socket.disconnect(); // ✅ cleanup
+    };
+  }, []);
+
+  useEffect(() => {
     if (token) fetchPosts();
+
+    const socket = socketRef.current;
+    if (!socket) return;
 
     // --- SOCKET.IO LISTENERS ---
     // New posts from other devices
@@ -67,6 +94,7 @@ function HomePage() {
 
   // Function to emit like to server
   const handleLikePost = (postId) => {
+    const socket = socketRef.current;
     if (!username) return alert("Please login first.");
 
     setPosts((prev) =>
