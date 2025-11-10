@@ -10,10 +10,10 @@ import Post from "./models/PostSchema.js";
 
 dotenv.config();
 
-const allowedOrigin =
-  process.env.NODE_ENV === "production"
-    ? "https://social-post-app-full-stack.vercel.app"
-    : "http://192.168.31.17:5173";
+// const allowedOrigin =
+//   process.env.NODE_ENV === "production"
+//     ? "https://social-post-app-full-stack.vercel.app"
+//     : "http://192.168.31.17:5173";
 
 // "http://192.168.31.17:5173",
 const app = express();
@@ -27,6 +27,15 @@ app.use(
   })
 );
 
+app.options(
+  "/(.*)",
+  cors({
+    origin: "https://social-post-app-full-stack.vercel.app",
+    credentials: true,
+  })
+);
+app.use(express.json());
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -35,8 +44,8 @@ const io = new Server(server, {
     credentials: true,
   },
   transports: ["websocket", "polling"],
-  allowEIO3: true, 
-  allowUpgrades: true, 
+  allowEIO3: true,
+  allowUpgrades: true,
 });
 
 app.use((req, res, next) => {
@@ -46,9 +55,6 @@ app.use((req, res, next) => {
 // app.options("*", cors());
 // app.options("/(.*)", cors());
 
-
-
-app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 // --- MongoDB Connection ---
@@ -109,6 +115,4 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 5000;
 // app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server running on port ${PORT} `));
-server.listen(PORT, () =>
-  console.log(`✅ Server running on port ${PORT} `)
-);
+server.listen(PORT, () => console.log(`✅ Server running on port ${PORT} `));
