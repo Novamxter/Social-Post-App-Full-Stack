@@ -17,6 +17,17 @@ const allowedOrigin =
 
 // "http://192.168.31.17:5173",
 const app = express();
+app.set("trust proxy", 1);
+
+app.use((req, res, next) => {
+  if (req.headers["x-forwarded-proto"] !== "https") {
+    // redirect to https
+    return res.redirect("https://" + req.headers.host + req.url);
+  }
+  next();
+});
+
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
