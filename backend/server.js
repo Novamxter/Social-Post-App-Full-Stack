@@ -27,13 +27,7 @@ app.use(
   })
 );
 
-app.options(
-  "/(.*)",
-  cors({
-    origin: "https://social-post-app-full-stack.vercel.app",
-    credentials: true,
-  })
-);
+
 app.use(express.json());
 
 const server = http.createServer(app);
