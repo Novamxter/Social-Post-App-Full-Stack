@@ -6,16 +6,14 @@ import { Server } from "socket.io";
 import http from "http";
 import userRoutes from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
-import Post from "./models/PostSchema.js"
-
+import Post from "./models/PostSchema.js";
 
 dotenv.config();
 
-
 const allowedOrigin =
   process.env.NODE_ENV === "production"
-    ? ["https://social-post-app-full-stack.vercel.app"]
-    : ["http://192.168.31.17:5173"];
+    ? "https://social-post-app-full-stack.vercel.app"
+    : "http://192.168.31.17:5173";
 
 // "http://192.168.31.17:5173",
 const app = express();
@@ -24,7 +22,9 @@ const io = new Server(server, {
   cors: {
     origin: allowedOrigin, // replace '*' with your frontend URL
     methods: ["GET", "POST"],
+    credentials: true,
   },
+  transports: ["polling"],
 });
 
 app.use((req, res, next) => {
@@ -36,11 +36,11 @@ app.use(
   cors({
     origin: allowedOrigin, // 👈 exact origin of your frontend
     credentials: true, // 👈 allow cookies/auth headers
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
-
 
 // --- MongoDB Connection ---
 mongoose
