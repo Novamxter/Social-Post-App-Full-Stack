@@ -43,6 +43,7 @@ function HomePage() {
     // ✅ Initialize socket only when component loads in browser
     socketRef.current = io("https://social-post-app-backend.onrender.com", {
       transports: ["websocket", "polling"],
+       path: "/socket.io",
       withCredentials: true,
     });
 

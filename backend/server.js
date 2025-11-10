@@ -19,12 +19,32 @@ dotenv.config();
 const app = express();
 app.set("trust proxy", 1);
 
+const allowedOrigins = [
+  "https://social-post-app-full-stack.vercel.app",
+  "https://social-post-app-full-stack.vercel.app/",
+];
+
+// ✅ Handle CORS manually for ALL requests including OPTIONS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://social-post-app-full-stack.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204); // ✅ reply with success for preflight
+  }
+  next();
+});
+
 app.use(
   cors({
-    origin: "https://social-post-app-full-stack.vercel.app", // 👈 exact origin of your frontend
+    origin: allowedOrigins, // 👈 exact origin of your frontend
     credentials: true, // 👈 allow cookies/auth headers
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     allowedHeaders: ["Content-Type", "Authorization"],
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   })
 );
 
