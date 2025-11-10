@@ -1,0 +1,133 @@
+/* ====== General Layout ====== */
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f4ff, #ffffff);
+  padding: 20px;
+  text-align: center;
+}
+
+/* ====== Header Section ====== */
+.welcome-header {
+  margin-bottom: 40px;
+  max-width: 400px;
+}
+
+.hero-img {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+.welcome-header h2 {
+  font-size: 1.8rem;
+  color: #1e40af;
+  margin-bottom: 10px;
+}
+
+.welcome-header p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* ====== Login Section ====== */
+.welcome-login-section {
+  width: 100%;
+  max-width: 350px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-login-section h3 {
+  font-size: 1.3rem;
+  color: #111;
+  margin-bottom: 20px;
+}
+
+/* Google Button */
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.google-btn:hover {
+  background: #f9fafb;
+}
+
+.google-btn img {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+}
+
+/* Other Login Method */
+.other-method {
+  margin: 15px 0;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* Email Button */
+.email-btn {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease-in-out;
+}
+
+.email-btn:hover {
+  background: #1e40af;
+}
+
+/* Footer Note */
+.footer-note {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 480px) {
+  .hero-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .welcome-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-login-section {
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .google-btn,
+  .email-btn {
+    font-size: 0.95rem;
+    padding: 9px;
+  }
+}

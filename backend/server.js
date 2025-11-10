@@ -1,0 +1,97 @@
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import { Server } from "socket.io";
+import http from "http";
+import userRoutes from "./routes/userRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
+import Post from "./models/PostSchema.js"
+
+dotenv.config();
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://192.168.31.17:5173", // replace '*' with your frontend URL
+    methods: ["GET", "POST"],
+  },
+});
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
+app.use(
+  cors({
+    origin: "http://192.168.31.17:5173", // 👈 exact origin of your frontend
+    credentials: true, // 👈 allow cookies/auth headers
+  })
+);
+app.use(express.json());
+app.use("/uploads", express.static("uploads"));
+
+
+// --- MongoDB Connection ---
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.log("❌ DB Error:", err));
+
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
+
+// --- Test Route ---
+app.get("/", (req, res) => {
+  res.send("Social Post App Backend Running 🚀");
+});
+
+// Listen for socket connections
+io.on("connection", (socket) => {
+  console.log("New client connected: ", socket.id);
+
+  // Listening for events from client
+  socket.on("newPost", (post) => {
+    // Broadcast the new post to all other clients except sender
+    socket.broadcast.emit("receivePost", post);
+  });
+
+  socket.on("likePost", async ({ postId, username }) => {
+    const post = await Post.findById(postId);
+    if (!post) return;
+
+    const alreadyLiked = post.likes.find((l) => l.username === username);
+    if (alreadyLiked) {
+      post.likes = post.likes.filter((l) => l.username !== username);
+    } else {
+      post.likes.push({ username });
+    }
+    await post.save();
+
+    const updated = await Post.findById(postId).populate(
+      "user",
+      "username email"
+    );
+    io.emit("receiveLike", updated);
+  });
+
+  // NEW: Comment Event
+  socket.on("addComment", async (updatedPost) => {
+    io.emit("receiveComment", updatedPost); // send to all clients
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected: ", socket.id);
+  });
+});
+
+const PORT = process.env.PORT || 5000;
+// app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server running on port ${PORT} `));
+server.listen(PORT, "0.0.0.0", () =>
+  console.log(`✅ Server running on port ${PORT} `)
+);

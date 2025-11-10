@@ -1,0 +1,158 @@
+.register-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.register-container h2 {
+  font-size: 24px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.register-container p {
+  color: #555;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.register-form input {
+  padding: 12px 15px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.register-form input:focus {
+  border-color: #007bff;
+}
+
+.password-field {
+  position: relative;
+  background-color: red;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #777;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  user-select: none;
+}
+
+.eye-icon:hover {
+  opacity: 1;
+  color: #333;
+}
+
+button {
+  padding: 12px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #005fcc;
+}
+
+.or {
+  margin: 20px 0 10px;
+  color: #888;
+}
+
+/* ✅ Fixed Google button */
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: #fff;
+  color: #333; /* FIXED text color */
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.2s ease;
+}
+
+.google-btn img {
+  width: 22px;
+  height: 22px;
+}
+
+.google-btn:hover {
+  background: #f8f9fa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.register-text {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #444;
+}
+
+.register-text span {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.register-text span:hover {
+  text-decoration: underline;
+}
+
+/* 🌐 Responsive Design */
+@media (max-width: 480px) {
+  .register-container {
+    padding: 30px 15px;
+    margin: 10px;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .register-container h2 {
+    font-size: 20px;
+  }
+
+  .register-container p {
+    font-size: 14px;
+  }
+
+  .register-form input {
+    font-size: 13px;
+  }
+
+  button {
+    font-size: 15px;
+  }
+}
