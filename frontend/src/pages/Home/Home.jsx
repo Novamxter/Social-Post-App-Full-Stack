@@ -17,6 +17,7 @@ const socket = io(
     withCredentials: true,
   }
 );
+window.socket = socket 
 
 function HomePage() {
   const [posts, setPosts] = useState([]);

@@ -17,7 +17,7 @@ const allowedOrigin =
 
 // "http://192.168.31.17:5173",
 const app = express();
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 
 
 
@@ -30,6 +30,7 @@ const io = new Server(server, {
     credentials: true,
   },
   transports: ["websocket", "polling"],
+  allowEIO3: true, 
   allowUpgrades: true, // prevents WebSocket attempt
 });
 
