@@ -41,7 +41,7 @@ function HomePage() {
   //         : "http://192.168.31.17:5000",
   useEffect(() => {
     // ✅ Initialize socket only when component loads in browser
-    socketRef.current = io("https://social-post-app-backend.onrender.com", {
+    socketRef.current = io("https://social-post-app-full-stack.onrender.com", {
       transports: ["websocket"],
        path: "/socket.io",
       withCredentials: true,
