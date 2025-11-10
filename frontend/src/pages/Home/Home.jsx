@@ -6,10 +6,17 @@ import PostSkeleton from "../../components/PostSkeleton";
 import { io } from "socket.io-client";
 import { getAllPosts } from "../../services/api.mjs";
 import { jwtDecode } from "jwt-decode";
-import { BASE_URL } from "../../services/api.mjs";
 import "../../styles/DashBoard.css";
 
-const socket = io(BASE_URL);
+const socket = io(
+  import.meta.env.NODE_ENV === "production"
+    ? "https://social-post-app-backend.onrender.com"
+    : "http://192.168.31.17:5000",
+  {
+    transports: ["websocket"],
+    withCredentials: true,
+  }
+);
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
@@ -70,7 +77,6 @@ function HomePage() {
           ? post.likes.filter((u) => u.username !== username)
           : [...post.likes, username];
 
-
         socket.emit("likePost", { postId, username });
 
         return { ...post, likes: updatedLikes };
@@ -84,7 +90,7 @@ function HomePage() {
 
   // Called by PostBox after fetching done
   const handlePostComplete = async () => {
-    await fetchPosts(); 
+    await fetchPosts();
     setPosting(false);
   };
 
