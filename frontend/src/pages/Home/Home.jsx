@@ -6,9 +6,10 @@ import PostSkeleton from "../../components/PostSkeleton";
 import { io } from "socket.io-client";
 import { getAllPosts } from "../../services/api.mjs";
 import { jwtDecode } from "jwt-decode";
+import { BASE_URL } from "../../services/api.mjs";
 import "../../styles/DashBoard.css";
 
-const socket = io("http://192.168.31.17:5000");
+const socket = io(BASE_URL);
 
 function HomePage() {
   const [posts, setPosts] = useState([]);
