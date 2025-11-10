@@ -19,11 +19,16 @@ dotenv.config();
 const app = express();
 app.set("trust proxy", 1);
 
-const allowedOrigins = [
-  "https://social-post-app-full-stack.vercel.app",
-  "https://social-post-app-full-stack.vercel.app/",
-];
+// const allowedOrigins = [
+//   "https://social-post-app-full-stack.vercel.app",
+//   "https://social-post-app-full-stack.vercel.app/",
+// ];
 
+app.use((req, res, next) => {
+  console.log(`➡️ ${req.method} ${req.path}`);
+  next();
+});
+ 
 // ✅ Handle CORS manually for ALL requests including OPTIONS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://social-post-app-full-stack.vercel.app");
@@ -32,7 +37,8 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", "true");
 
   if (req.method === "OPTIONS") {
-    return res.status(200).send("OK") // ✅ reply with success for preflight
+    console.log("🔵 Preflight request received:", req.path);
+    return res.status(200).end() // ✅ reply with success for preflight
   }
   next();
 });
@@ -61,6 +67,7 @@ const io = new Server(server, {
   transports: ["websocket", "polling"],
   allowEIO3: true,
   allowUpgrades: true,
+  path: "/socket.io"
 });
 
 app.use((req, res, next) => {

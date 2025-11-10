@@ -10,6 +10,7 @@ const API = axios.create({
   baseURL: "https://social-post-app-backend.onrender.com/api" , // backend base url
   withCredentials: true,
 });
+axios.defaults.withCredentials = true;
 
 // ---------- USER AUTH ----------
 export const registerUser = (data) => API.post("/users/register", data);
