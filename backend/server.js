@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://192.168.31.17:5173", // replace '*' with your frontend URL
+    origin: ["http://192.168.31.17:5173","https://social-post-app-full-stack.vercel.app"], // replace '*' with your frontend URL
     methods: ["GET", "POST"],
   },
 });
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: "http://192.168.31.17:5173", // 👈 exact origin of your frontend
+    origin: ["http://192.168.31.17:5173","https://social-post-app-full-stack.vercel.app"], // 👈 exact origin of your frontend
     credentials: true, // 👈 allow cookies/auth headers
   })
 );
