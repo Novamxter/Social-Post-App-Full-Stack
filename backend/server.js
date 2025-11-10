@@ -25,6 +25,8 @@ const io = new Server(server, {
     credentials: true,
   },
   transports: ["polling"],
+  allowEIO3: true,
+  allowUpgrades: false, // prevents WebSocket attempt
 });
 
 app.use((req, res, next) => {

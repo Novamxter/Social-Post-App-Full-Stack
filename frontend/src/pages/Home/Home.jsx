@@ -15,6 +15,7 @@ const socket = io(
   {
     transports: ["polling"],
     withCredentials: true,
+    upgrade: false,
   }
 );
 
