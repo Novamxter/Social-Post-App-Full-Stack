@@ -24,6 +24,7 @@ app.use(
     origin: "https://social-post-app-full-stack.vercel.app", // 👈 exact origin of your frontend
     credentials: true, // 👈 allow cookies/auth headers
     methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
