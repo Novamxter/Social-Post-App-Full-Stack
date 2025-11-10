@@ -9,7 +9,7 @@ import { jwtDecode } from "jwt-decode";
 import "../../styles/DashBoard.css";
 
 const socket = io(
-  import.meta.env.NODE_ENV === "production"
+  import.meta.env.MODE === "production"
     ? "https://social-post-app-backend.onrender.com"
     : "http://192.168.31.17:5000",
   {

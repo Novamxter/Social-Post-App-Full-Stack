@@ -2,7 +2,7 @@
 import axios from "axios";
 
 
-export const BASE_URL = import.meta.env.NODE_ENV === "production" 
+export const BASE_URL = import.meta.env.MODE === "production" 
   ? "https://social-post-app-backend.onrender.com/api"
   : "http://192.168.31.17:5000/api";
 
