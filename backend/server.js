@@ -36,7 +36,9 @@ app.use((req, res, next) => {
   req.io = io;
   next();
 });
-app.options("*", cors());
+// app.options("*", cors());
+app.options("/(.*)", cors());
+
 
 app.use(
   cors({
