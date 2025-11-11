@@ -80,28 +80,6 @@ export const getCurrentUser = async (req, res) => {
   }
 };
 
-// export const updateProfilePic = async (req, res) => {
-//   try {
-//     const { user } = req;
-//     // console.log("File received:", req.file);
-//     if (!req.file)
-//       return res.status(400).json({ message: "No image uploaded" });
-
-//     // const base64Image = req.file.buffer.toString("base64");
-
-//     const updatedUser = await User.findByIdAndUpdate(
-//       req.user.id,
-//       { profilePic: `/uploads/profilePics/${req.file.filename}` },
-//       { new: true }
-//     ).select("-password");
-
-//     // console.log("User updated:", user);
-//     res.json({ message: "Profile picture updated", user: updatedUser });
-//   } catch (error) {
-//     console.error("Upload error:", error);
-//     res.status(500).json({ message: "Error updating profile", error });
-//   }
-// };
 
 export const updateProfilePic = async (req, res) => {
   try {
