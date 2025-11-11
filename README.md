@@ -13,6 +13,16 @@ This project allows users to **sign up, log in, create posts (text/images), like
 
 ---
 
+### 🧪 Demo Accounts
+You can use these demo accounts to explore the app:
+
+- **Email:** mohit@example.com | **Password:** 123456  
+- **Email:** atul123@gmail.com | **Password:** 123456
+- **Email:** sneha2345@gmail.com | **Password:** 123456
+- **Email:** 123priya@gmail.com | **Password:** 123456
+
+---
+
 ## 🧠 Objective
 
 > Build a **Mini Social Post Application** where users can:
