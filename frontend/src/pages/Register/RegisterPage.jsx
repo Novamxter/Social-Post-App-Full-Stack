@@ -14,6 +14,7 @@ export default function RegisterPage() {
 
   const [user, setUser] = useState({ username: "", email: "", password: "" });
   const { saveToken, setIsLogout } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleData = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -21,6 +22,7 @@ export default function RegisterPage() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await registerUser(user);
       localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -38,6 +40,8 @@ export default function RegisterPage() {
       } else {
         console.error("Error in Registration:", err.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,7 +90,9 @@ export default function RegisterPage() {
           </span>
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" disabled={loading}>
+          {loading ? <div className="spinner"></div> : "Register"}
+        </button>
       </form>
 
       <p className="or">Or</p>

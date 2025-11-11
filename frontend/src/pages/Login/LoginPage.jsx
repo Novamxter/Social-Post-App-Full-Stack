@@ -12,6 +12,7 @@ export default function LoginPage() {
 
   const [user, setUser] = useState({ email: "", password: "" });
   const { saveToken, setIsLogout } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handleData = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -19,6 +20,7 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await loginUser(user);
       localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -36,6 +38,8 @@ export default function LoginPage() {
       } else {
         console.error("Error in Login:", err);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -77,7 +81,9 @@ export default function LoginPage() {
           </span>
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit" disabled={loading}>
+          {loading ? <div className="spinner"></div> : "Login"}
+        </button>
       </form>
 
       <p className="or">Or</p>

@@ -11,7 +11,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="logo">TaskPlanet Social</div>
+      <div className="logo">SocialPost</div>
       <div className="nav-links">
         <Link to="/home">Home</Link>
         <Link to="/profile">Profile</Link>

@@ -20,15 +20,19 @@ function HomePage() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [posting, setPosting] = useState(false);
   const [socket, setSocket] = useState(null);
+  const [loadingPosts, setLoadingPosts] = useState(true);
 
   const username = token ? jwtDecode(token)?.username : null;
 
   const fetchPosts = async () => {
+    setLoadingPosts(true);
     try {
       const res = await getAllPosts(token);
       setPosts(res.data);
     } catch (err) {
       console.error("Error fetching posts:", err);
+    } finally {
+      setLoadingPosts(false);
     }
   };
 
@@ -71,7 +75,7 @@ function HomePage() {
       );
     });
 
-    // Cleanup 
+    // Cleanup
     return () => {
       socket.off("receivePost");
       socket.off("receiveLike");
@@ -121,18 +125,26 @@ function HomePage() {
         />
 
         <div className="feed-grid">
-          {/* Loader Skeleton */}
+          {/* Loader while fetching all posts */}
+          {loadingPosts && (
+            <div className="posts-loader-overlay">
+              <div className="posts-loader"></div>
+            </div>
+          )}
+
+          {/* Loader Skeleton while posting */}
           {posting && <PostSkeleton />}
 
-          {posts.map((post) => (
-            <PostCard
-              key={post._id}
-              post={post}
-              token={token}
-              onLike={handleLikePost}
-              socket={socket}
-            />
-          ))}
+          {!loadingPosts &&
+            posts.map((post) => (
+              <PostCard
+                key={post._id}
+                post={post}
+                token={token}
+                onLike={handleLikePost}
+                socket={socket}
+              />
+            ))}
         </div>
       </div>
     </div>

@@ -61,6 +61,28 @@ body {
   margin: 30px auto;
 }
 
+.post-box-wrapper {
+  margin-bottom: 20px;
+}
+
+/* Collapsed mini box */
+.post-box-collapsed {
+  width: 100%;
+  min-height: 50px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: text;
+  color: #555;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.post-box-collapsed:hover {
+  background: #d1d5db;
+}
+
 /* Post Box */
 .post-box {
   background: #fff;
@@ -309,7 +331,7 @@ body {
 }
 
 .comments::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
 
@@ -361,6 +383,37 @@ body {
   font-size: 14px;
   color: #333;
   line-height: 1.4;
+}
+
+.posts-loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 400px; /* adjust as per your feed height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+}
+
+.posts-loader {
+  border: 10px solid #e0e0e0; /* light grey */
+  border-top: 10px solid #2563eb; /* primary blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive */
