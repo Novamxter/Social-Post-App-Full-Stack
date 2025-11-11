@@ -1,6 +1,5 @@
 import cloudinary from "../config/cloudinaryConfig.js";
 import Post from "../models/PostSchema.js";
-import User from "../models/UserSchema.js";
 
 // ------------------------ CREATE POST ------------------------
 export const createPost = async (req, res) => {
@@ -86,7 +85,7 @@ export const likePost = async (req, res) => {
 
     const updatedPost = await post.save();
 
-    await updatedPost.populate("user", "username email");
+    await updatedPost.populate("user", "username email profilePic");
     // ✅ Emit through socket.io to everyone except sender
     req.io.emit("receiveLike", updatedPost);
     // res.status(200).json(updatedPost);
@@ -127,7 +126,7 @@ export const commentPost = async (req, res) => {
     // Return updated post
     const updatedPost = await Post.findById(postId).populate(
       "user",
-      "username email"
+      "username email profilePic"
     );
 
     res.status(200).json(updatedPost);

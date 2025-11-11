@@ -90,7 +90,7 @@ function HomePage() {
         const hasLiked = post.likes.some((l) => l.username === username);
         const updatedLikes = hasLiked
           ? post.likes.filter((u) => u.username !== username)
-          : [...post.likes, username];
+          : [...post.likes, { username }];
 
         socket.emit("likePost", { postId, username });
 
