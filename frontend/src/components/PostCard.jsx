@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Heart, MessageCircle } from "lucide-react"; // lucide-react icons
 import { likePost, commentPost } from "../services/api.mjs";
 import { jwtDecode } from "jwt-decode";
+import { allowedOrigin } from "../pages/Home/Home";
 
 function PostCard({ post, token, onLike, socket }) {
   const decoded = token ? jwtDecode(token) : null;
@@ -14,7 +15,7 @@ function PostCard({ post, token, onLike, socket }) {
 
   const profilePicSrc =
   post.user?.profilePic
-    ? `http://192.168.31.17:5000${post.user.profilePic}`
+    ? `${allowedOrigin}${post.user.profilePic}`
     : ""; // fallback default avatar https://via.placeholder.com/40
 
   const [liked, setLiked] = useState(false);

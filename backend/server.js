@@ -10,10 +10,10 @@ import Post from "./models/PostSchema.js";
 
 dotenv.config();
 
-// const allowedOrigin =
-//   process.env.NODE_ENV === "production"
-//     ? "https://social-post-app-full-stack.vercel.app"
-//     : "http://192.168.31.17:5173";
+const allowedOrigin =
+  process.env.NODE_ENV === "production"
+    ? "https://social-post-app-full-stack.vercel.app"
+    : "http://192.168.31.17:5173";
 
 // "http://192.168.31.17:5173",
 const app = express();
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
  
 // ✅ Handle CORS manually for ALL requests including OPTIONS
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://social-post-app-full-stack.vercel.app");
+  res.header("Access-Control-Allow-Origin", allowedOrigin);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.header("Access-Control-Allow-Credentials", "true");
@@ -60,7 +60,7 @@ app.use(express.json());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://social-post-app-full-stack.vercel.app", // replace '*' with your frontend URL
+    origin: allowedOrigin, // replace '*' with your frontend URL
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -74,10 +74,6 @@ app.use((req, res, next) => {
   req.io = io;
   next();
 });
-// app.options("/api/*", cors());
-
-// app.options("*", cors());
-// app.options("/(.*)", cors());
 
 app.use("/uploads", express.static("uploads"));
 

@@ -6,7 +6,7 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/"); // SPA navigation instead of full page reload
+    navigate("/"); 
   };
 
   return (

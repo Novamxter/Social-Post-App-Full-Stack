@@ -8,16 +8,11 @@ import { getAllPosts } from "../../services/api.mjs";
 import { jwtDecode } from "jwt-decode";
 import "../../styles/DashBoard.css";
 
-// const socket = io(
-//   import.meta.env.MODE === "production"
-//     ? "https://social-post-app-backend.onrender.com"
-//     : "http://192.168.31.17:5000",
-//   {
-//     transports: ["websocket", "polling"],
-//     withCredentials: true,
-//   }
-// );
-
+export const allowedOrigin =
+  import.meta.env.MODE === "production"
+    ? "https://social-post-app-full-stack.onrender.com"
+    : "http://192.168.31.17:5000";
+    
 function HomePage() {
   const socketRef = useRef(null);
 
@@ -36,14 +31,12 @@ function HomePage() {
       console.error("Error fetching posts:", err);
     }
   };
-  // import.meta.env.MODE === "production"
-  //         ? "https://social-post-app-backend.onrender.com"
-  //         : "http://192.168.31.17:5000",
+
   useEffect(() => {
     // ✅ Initialize socket only when component loads in browser
-    socketRef.current = io("https://social-post-app-full-stack.onrender.com", {
+    socketRef.current = io(allowedOrigin, {
       transports: ["websocket"],
-       path: "/socket.io",
+      path: "/socket.io",
       withCredentials: true,
     });
 
