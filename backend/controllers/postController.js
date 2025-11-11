@@ -8,7 +8,9 @@ export const createPost = async (req, res) => {
     const image = req.file ? `/uploads/posts/${req.file.filename}` : null;
 
     if (!req.user) {
-      console.log("⚠️ No user found in req.user — middleware might have failed");
+      console.log(
+        "⚠️ No user found in req.user — middleware might have failed"
+      );
       return res.status(401).json({ error: "Unauthorized: User not found" });
     }
 
@@ -17,7 +19,9 @@ export const createPost = async (req, res) => {
     // Validate request content
     if (!text && !image) {
       console.log("❌ Missing both text and image fields");
-      return res.status(400).json({ error: "Either text or image is required" });
+      return res
+        .status(400)
+        .json({ error: "Either text or image is required" });
     }
 
     // Fetch user from DB (extra check)
@@ -48,7 +52,6 @@ export const createPost = async (req, res) => {
   }
 };
 
-
 // ------------------------ GET ALL POSTS ------------------------
 export const getAllPosts = async (req, res) => {
   try {
@@ -67,11 +70,15 @@ export const likePost = async (req, res) => {
   try {
     const { postId, username } = req.body;
 
+    if (!postId || !username) {
+      return res.status(400).json({ message: "Post ID or username missing" });
+    }
+
     const post = await Post.findById(postId);
     if (!post) return res.status(404).json({ error: "Post not found" });
 
     // Check if user already liked
-    const alreadyLiked = post.likes.find((like) => like.username === username);
+    const alreadyLiked = post.likes.some((like) => like.username === username);
 
     if (alreadyLiked) {
       post.likes = post.likes.filter((like) => like.username !== username);
@@ -79,12 +86,14 @@ export const likePost = async (req, res) => {
       post.likes.push({ username });
     }
 
-    await post.save();
-    const updatedPost = await Post.findById(postId).populate("user", "username email");
+    const updatedPost = await post.save();
 
+    await updatedPost.populate("user", "username email");
     // ✅ Emit through socket.io to everyone except sender
     req.io.emit("receiveLike", updatedPost);
+    // res.status(200).json(updatedPost);
   } catch (err) {
+    console.error("Error in likePost:", err);
     res.status(500).json({ message: err.message });
   }
 };
@@ -92,9 +101,8 @@ export const likePost = async (req, res) => {
 // ------------------------ COMMENT ON POST ------------------------
 export const commentPost = async (req, res) => {
   try {
-
-    const { postId, text } = req.body; 
-    const user = req.user; 
+    const { postId, text } = req.body;
+    const user = req.user;
 
     if (!text?.trim()) {
       console.log("❌ Empty comment");

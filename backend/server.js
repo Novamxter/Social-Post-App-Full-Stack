@@ -48,14 +48,6 @@ mongoose
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ DB Error:", err));
 
-app.use("/api/users", userRoutes);
-app.use("/api/posts", postRoutes);
-
-// --- Test Route ---
-app.get("/", (req, res) => {
-  res.send("Social Post App Backend Running 🚀");
-});
-
 // --- Socket.io ---
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -73,6 +65,14 @@ const io = new Server(server, {
 app.use((req, res, next) => {
   req.io = io;
   next();
+});
+
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
+
+// --- Test Route ---
+app.get("/", (req, res) => {
+  res.send("Social Post App Backend Running 🚀");
 });
 
 // Listen for socket connections
