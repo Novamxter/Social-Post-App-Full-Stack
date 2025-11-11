@@ -11,7 +11,7 @@ body {
 }
 
 /* Navbar */
-.navbar {
+/* .navbar {
   background: #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -52,7 +52,101 @@ body {
 
 .logout-btn:hover {
   background: #1e4ed8;
+} */
+
+
+.navbar {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
+
+.logo {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #2563eb;
+}
+
+/* --- Links Desktop --- */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #1e4ed8;
+}
+
+/* --- Hamburger (hidden on desktop) --- */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2563eb;
+}
+
+/* --- Mobile View --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+   .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: white;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: all 0.4s ease;
+  }
+
+  .nav-links.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+
+  .logout-btn {
+    padding: 8px 0;
+    width: 80%;
+  }
+}
+
 
 /* Main Content */
 .home-content {
@@ -108,11 +202,55 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .post-actions input[type="file"] {
+  /* font-size: 0.9rem; */
+  display: none;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #f1f5f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  flex: 1;
+}
+
+.file-label:hover {
+  background: #e2e8f0;
+}
+
+.camera-icon {
+  font-size: 1.2rem;
+}
+
+.file-placeholder {
+  color: #6b7280;
   font-size: 0.9rem;
 }
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.file-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #16a34a;
+  border-radius: 50%;
+}
+
 
 .post-actions button {
   background: #2563eb;
@@ -418,5 +556,18 @@ body {
 @media (max-width: 700px) {
   .feed-grid {
     column-count: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .file-label,
+  .post-actions button {
+    width: 100%;
+    justify-content: center;
   }
 }

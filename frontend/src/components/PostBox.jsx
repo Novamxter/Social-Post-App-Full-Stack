@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { createPost } from "../services/api.mjs";
+import { Camera } from "lucide-react";
 
 function PostBox({ onPostCreated, onPostComplete, token, fetchPosts, socket }) {
   const [content, setContent] = useState("");
@@ -33,7 +34,7 @@ function PostBox({ onPostCreated, onPostComplete, token, fetchPosts, socket }) {
         if (fileInputRef.current) fileInputRef.current.value = null;
 
         setTimeout(() => {
-          onPostComplete(); // hide skeleton and refresh posts
+          onPostComplete();
         }, 400);
         setExpanded(false);
       }
@@ -61,7 +62,23 @@ function PostBox({ onPostCreated, onPostComplete, token, fetchPosts, socket }) {
             disabled={loading}
           />
           <div className="post-actions">
+            <label htmlFor="fileInput" className="file-label">
+              <span className="camera-icon">
+                <Camera />
+              </span>
+              {image ? (
+                <span className="file-info">
+                  {image.name.length > 12
+                    ? image.name.substring(0, 12) + "..."
+                    : image.name}
+                  <span className="file-indicator"></span>
+                </span>
+              ) : (
+                <span className="file-placeholder">Add Image</span>
+              )}
+            </label>
             <input
+              id="fileInput"
               type="file"
               accept="image/*"
               ref={fileInputRef}
