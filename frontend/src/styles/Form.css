@@ -8,7 +8,7 @@
   max-width: 380px;
   margin: 70px auto;
   font-family: "Poppins", sans-serif;
-  position: relative; /* For back button positioning */
+  position: relative; 
 }
 
 .auth-container h2 {
