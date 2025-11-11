@@ -99,7 +99,7 @@ export default function RegisterPage() {
 
       <button className="google-btn">
         <img
-          src="https://developers.google.com/identity/images/g-logo.png"
+          src="/Images/google.png"
           alt="Google"
         />
         Continue with Google

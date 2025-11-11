@@ -37,7 +37,7 @@ function HomePage() {
   };
 
   useEffect(() => {
-    // ✅ Initialize socket only when component loads in browser
+    // Initialize socket 
     socketRef.current = io(allowedOrigin, {
       transports: ["websocket"],
       path: "/socket.io",
@@ -48,7 +48,7 @@ function HomePage() {
     window.socket = socket;
     setSocket(socket);
     return () => {
-      socket.disconnect(); // ✅ cleanup
+      socket.disconnect(); // cleanup
     };
   }, []);
 

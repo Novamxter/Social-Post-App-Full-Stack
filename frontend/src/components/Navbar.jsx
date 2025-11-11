@@ -12,16 +12,6 @@ function Navbar() {
   };
 
   return (
-    // <nav className="navbar">
-    //   <div className="logo">SocialPost</div>
-    //   <div className="nav-links">
-    //     <Link to="/home">Home</Link>
-    //     <Link to="/profile">Profile</Link>
-    //     <button className="logout-btn" onClick={handleLogout}>
-    //       Logout
-    //     </button>
-    //   </div>
-    // </nav>
      <nav className="navbar">
       <div className="logo">SocialPost</div>
 

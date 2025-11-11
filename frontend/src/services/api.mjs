@@ -1,6 +1,4 @@
-// src/services/api.mjs
 import axios from "axios";
-
 
 export const BASE_URL = import.meta.env.MODE === "production" 
   ? "https://social-post-app-full-stack.onrender.com/api"

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { loginUser } from "../../services/api.mjs";
-// import "./LoginPage.css";
 import "../../styles/Form.css";
 
 export default function LoginPage() {
@@ -90,7 +89,7 @@ export default function LoginPage() {
 
       <button className="google-btn">
         <img
-          src="https://developers.google.com/identity/images/g-logo.png"
+          src="/Images/google.png"
           alt="Google"
         />
         Sign in with Google

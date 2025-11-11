@@ -8,7 +8,6 @@ const ProfilePage = () => {
   const [preview, setPreview] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Handle profile pic upload
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -26,7 +25,7 @@ const ProfilePage = () => {
       setLoading(false);
     }
   };
-  // data:image/jpeg;base64,
+
   return (
     <div className="profile-container">
       <div className="profile-card">
@@ -35,7 +34,7 @@ const ProfilePage = () => {
           <div className="profile-info">
             <div className="profile-page-pic-container">
               <img
-                src={preview || user.profilePic}
+                src={user.profilePic || "/Images/profile.png"}
                 alt="Profile"
                 className="profile-page-pic"
               />

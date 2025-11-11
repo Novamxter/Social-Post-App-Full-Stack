@@ -74,7 +74,7 @@ function PostCard({ post, token, onLike, socket }) {
     <div className="post-card">
       <div className="post-info">
         <div className="profile-pic">
-          <img src={post.user?.profilePic} alt={post.user?.username} />
+          <img src={post.user?.profilePic || "/Images/profile.png"} alt={post.user?.username} />
         </div>
         <div className="post-details">
           <div className="username">{post.user?.username || "Anonymous"}</div>
@@ -146,7 +146,7 @@ function PostCard({ post, token, onLike, socket }) {
               <div className="comment-item" key={idx}>
                 <div className="comment-profile-pic">
                   <img
-                    src={c.profilePic || "/default-profile.png"}
+                    src={c.profilePic || "/Images/profile.png"}
                     alt={c.username}
                   />
                 </div>

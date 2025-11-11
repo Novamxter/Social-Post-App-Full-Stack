@@ -7,7 +7,6 @@ import RegisterPage from "./pages/Register/RegisterPage";
 import Home from "./pages/Home/Home";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import Navbar from "./components/Navbar";
-// import SocialPage from "./pages/Social/Social";
 import "./App.css";
 
 function App() {
