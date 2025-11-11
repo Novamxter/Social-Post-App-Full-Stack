@@ -10,7 +10,6 @@ const API = axios.create({
   baseURL: BASE_URL , // backend base url
   withCredentials: true,
 });
-axios.defaults.withCredentials = true;
 
 // ---------- USER AUTH ----------
 export const registerUser = (data) => API.post("/users/register", data);
@@ -39,22 +38,20 @@ export const updateProfilePic = async (formData, token) => {
 // ---------- POSTS ----------
 export const createPost = async (data, token) => {
   try {
-    // console.log(token);
     return await API.post("/posts/create", data, {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch (err) {
-    console.log("Error api.mjs : ", err);
+    console.log("Error createPost api.mjs : ", err);
   }
 };
 export const getAllPosts = async (token) => {
   try {
-    // console.log(token);
     return await API.get("/posts/all", {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch (err) {
-    console.log("Error api.mjs : ", err);
+    console.log("Error getAllPosts api.mjs : ", err);
   }
 };
 

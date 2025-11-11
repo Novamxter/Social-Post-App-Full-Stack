@@ -12,7 +12,7 @@ export const allowedOrigin =
   import.meta.env.MODE === "production"
     ? "https://social-post-app-full-stack.onrender.com"
     : "http://192.168.31.17:5000";
-    
+
 function HomePage() {
   const socketRef = useRef(null);
 
@@ -43,8 +43,6 @@ function HomePage() {
     const socket = socketRef.current;
     window.socket = socket;
     setSocket(socket);
-    console.log("Connected?", socket.connected);
-
     return () => {
       socket.disconnect(); // ✅ cleanup
     };
@@ -57,12 +55,10 @@ function HomePage() {
     if (!socket) return;
 
     // --- SOCKET.IO LISTENERS ---
-    // New posts from other devices
     socket.on("receivePost", (newPost) => {
       setPosts((prev) => [newPost, ...prev]);
     });
 
-    // Likes from other devices
     socket.on("receiveLike", (updatedPost) => {
       setPosts((prev) =>
         prev.map((post) => (post._id === updatedPost._id ? updatedPost : post))
@@ -75,7 +71,7 @@ function HomePage() {
       );
     });
 
-    // Cleanup on unmount
+    // Cleanup 
     return () => {
       socket.off("receivePost");
       socket.off("receiveLike");
@@ -83,7 +79,6 @@ function HomePage() {
     };
   }, [token]);
 
-  // Function to emit like to server
   const handleLikePost = (postId) => {
     const socket = socketRef.current;
     if (!username) return alert("Please login first.");

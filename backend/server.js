@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 import dotenv from "dotenv";
 import { Server } from "socket.io";
 import http from "http";
@@ -15,14 +14,8 @@ const allowedOrigin =
     ? "https://social-post-app-full-stack.vercel.app"
     : "http://192.168.31.17:5173";
 
-// "http://192.168.31.17:5173",
 const app = express();
 app.set("trust proxy", 1);
-
-// const allowedOrigins = [
-//   "https://social-post-app-full-stack.vercel.app",
-//   "https://social-post-app-full-stack.vercel.app/",
-// ];
 
 app.use((req, res, next) => {
   console.log(`➡️ ${req.method} ${req.path}`);
@@ -43,38 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(
-//   cors({
-//     origin: allowedOrigins, // 👈 exact origin of your frontend
-//     credentials: true, // 👈 allow cookies/auth headers
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//     preflightContinue: false,
-//     optionsSuccessStatus: 204,
-//   })
-// );
-
-
 app.use(express.json());
-
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: allowedOrigin, // replace '*' with your frontend URL
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-  transports: ["websocket", "polling"],
-  allowEIO3: true,
-  allowUpgrades: true,
-  path: "/socket.io"
-});
-
-app.use((req, res, next) => {
-  req.io = io;
-  next();
-});
-
 app.use("/uploads", express.static("uploads"));
 
 // --- MongoDB Connection ---
@@ -92,6 +54,25 @@ app.use("/api/posts", postRoutes);
 // --- Test Route ---
 app.get("/", (req, res) => {
   res.send("Social Post App Backend Running 🚀");
+});
+
+// --- Socket.io ---
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: allowedOrigin, // replace '*' with your frontend URL
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+  transports: ["websocket", "polling"],
+  allowEIO3: true,
+  allowUpgrades: true,
+  path: "/socket.io"
+});
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
 });
 
 // Listen for socket connections
