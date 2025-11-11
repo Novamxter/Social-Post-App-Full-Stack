@@ -6,19 +6,17 @@ import {
   getCurrentUser
 } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
-import { uploadProfile, deleteOldProfilePic } from "../middleware/upload.js";
+import { uploadProfile } from "../middleware/upload.js";
 
 const router = express.Router();
 
 router.post("/login", loginUser);
 router.post("/register", registerUser);
-router.get("/me", protect, getCurrentUser);
-// router.post("/upload-profile", verifyToken, upload.single("profilePic"), 
+router.get("/me", protect, getCurrentUser); 
 router.put(
   "/update-profile-pic",
   protect,
   uploadProfile.single("image"),
-  deleteOldProfilePic,
   updateProfilePic
 );
 

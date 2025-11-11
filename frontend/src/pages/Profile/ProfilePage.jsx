@@ -26,7 +26,7 @@ const ProfilePage = () => {
       setLoading(false);
     }
   };
-// data:image/jpeg;base64,
+  // data:image/jpeg;base64,
   return (
     <div className="profile-container">
       <div className="profile-card">
@@ -35,12 +35,7 @@ const ProfilePage = () => {
           <div className="profile-info">
             <div className="profile-page-pic-container">
               <img
-                src={
-                  preview ||
-                  (user.profilePic
-                    ? `http://192.168.31.17:5000${user.profilePic}`    
-                    : "https://via.placeholder.com/120")
-                }
+                src={preview || user.profilePic}
                 alt="Profile"
                 className="profile-page-pic"
               />

@@ -22,6 +22,7 @@ const postSchema = new mongoose.Schema({
     {
       username: String,
       comment: String,
+      profilePic:String,
       createdAt: {
         type: Date,
         default: Date.now,

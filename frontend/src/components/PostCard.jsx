@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Heart, MessageCircle } from "lucide-react"; // lucide-react icons
 import { likePost, commentPost } from "../services/api.mjs";
 import { jwtDecode } from "jwt-decode";
-import { allowedOrigin } from "../pages/Home/Home";
 
 function PostCard({ post, token, onLike, socket }) {
   const decoded = token ? jwtDecode(token) : null;
@@ -12,12 +11,6 @@ function PostCard({ post, token, onLike, socket }) {
   const [newComment, setNewComment] = useState("");
   const [showComments, setShowComments] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
-
-  const profilePicSrc =
-  post.user?.profilePic
-    ? `${allowedOrigin}${post.user.profilePic}`
-    : ""; // fallback default avatar https://via.placeholder.com/40
-
   const [liked, setLiked] = useState(false);
 
   // Check if this post is liked by current user
@@ -81,7 +74,7 @@ function PostCard({ post, token, onLike, socket }) {
     <div className="post-card">
       <div className="post-info">
         <div className="profile-pic">
-          <img src={profilePicSrc} alt={post.user?.username} />
+          <img src={post.user?.profilePic} alt={post.user?.username} />
         </div>
         <div className="post-details">
           <div className="username">{post.user?.username || "Anonymous"}</div>
@@ -93,7 +86,7 @@ function PostCard({ post, token, onLike, socket }) {
 
       {post.image && (
         <div className="post-image-container">
-          <img src={`http://192.168.31.17:5000${post.image}`} alt="Post" />
+          <img src={post.image} alt="Post" />
         </div>
       )}
       {post.text && <p>{post.text}</p>}
@@ -152,10 +145,10 @@ function PostCard({ post, token, onLike, socket }) {
             {[...comments].reverse().map((c, idx) => (
               <div className="comment-item" key={idx}>
                 <div className="comment-profile-pic">
-                  {/* <img
+                  <img
                     src={c.profilePic || "/default-profile.png"}
                     alt={c.username}
-                  /> */}
+                  />
                 </div>
                 <div className="comment-content">
                   <div className="comment-header">

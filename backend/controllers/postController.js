@@ -1,3 +1,4 @@
+import cloudinary from "../config/cloudinaryConfig.js";
 import Post from "../models/PostSchema.js";
 import User from "../models/UserSchema.js";
 
@@ -5,37 +6,34 @@ import User from "../models/UserSchema.js";
 export const createPost = async (req, res) => {
   try {
     const text = req.body.text || req.body.content;
-    const image = req.file ? `/uploads/posts/${req.file.filename}` : null;
+    let imageUrl = null;
 
     if (!req.user) {
-      console.log(
-        "⚠️ No user found in req.user — middleware might have failed"
-      );
       return res.status(401).json({ error: "Unauthorized: User not found" });
     }
 
     const userId = req.user._id;
 
     // Validate request content
-    if (!text && !image) {
-      console.log("❌ Missing both text and image fields");
+    if (!text && !req.file) {
       return res
         .status(400)
         .json({ error: "Either text or image is required" });
     }
 
-    // Fetch user from DB (extra check)
-    const user = await User.findById(userId);
-    if (!user) {
-      console.log("❌ User not found in DB for ID:", userId);
-      return res.status(404).json({ error: "User not found" });
+    // Upload image to Cloudinary if file exists
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "posts",
+        resource_type: "image",
+      });
+      imageUrl = result.secure_url;
     }
 
-    // Create new post
     const newPost = new Post({
-      user: user._id,
+      user: userId,
       text,
-      image,
+      image: imageUrl,
     });
 
     await newPost.save();
@@ -118,6 +116,7 @@ export const commentPost = async (req, res) => {
     // 💾 Add comment to post
     const newComment = {
       username: user.username,
+      profilePic: user.profilePic,
       comment: text,
       createdAt: new Date(),
     };
