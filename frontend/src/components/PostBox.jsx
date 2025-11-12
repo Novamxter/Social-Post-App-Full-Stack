@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { createPost } from "../services/api.mjs";
-import { Camera } from "lucide-react";
+import { Camera, X } from "lucide-react";
 
 function PostBox({ onPostCreated, onPostComplete, token, fetchPosts, socket }) {
   const [content, setContent] = useState("");
@@ -55,6 +55,20 @@ function PostBox({ onPostCreated, onPostComplete, token, fetchPosts, socket }) {
       ) : (
         // Expanded full form
         <form className="post-box" onSubmit={handleSubmit}>
+  
+           <div className="post-box-header">
+            <h3>Create Post</h3>
+            <button
+              type="button"
+              className="close-btn"
+              onClick={() => setExpanded(false)}
+              disabled={loading}
+              aria-label="Close"
+            >
+              <X size={18} />
+            </button>
+          </div>
+
           <textarea
             placeholder="What's on your mind?"
             value={content}

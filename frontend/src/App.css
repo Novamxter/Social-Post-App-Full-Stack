@@ -1,15 +1,62 @@
+:root {
+  /* Colors */
+  --color-primary: #2563eb;
+  --color-primary-dark: #1e4ed8;
+  --color-accent-blue: #007bff;
+  --color-accent-blue-dark: #0056b3;
+
+  --color-bg-light: #ffffff;
+  --color-bg-gray: #f3f4f6;
+  --color-bg-muted: #e5e7eb;
+
+  --color-border: #ddd;
+  --color-border-light: #eee;
+
+  --color-text: #333;
+  --color-text-light: #444;
+  --color-text-muted: #555;
+  --color-text-gray: #777;
+  --color-text-faint: #888;
+
+  --color-scroll-thumb: rgba(0, 0, 0, 0.2);
+  --color-scroll-track: transparent;
+
+  --color-green: #16a34a;
+  --color-white: #ffffff;
+
+  /* Shadows */
+  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 2px 10px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-full: 50%;
+
+  /* Font Sizes */
+  --font-sm: 0.9rem;
+  --font-md: 1rem;
+  --font-lg: 1.4rem;
+   --font-primary: "Poppins", sans-serif;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease-in-out;
+  --transition-medium: 0.3s ease;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-.app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(180deg, #ffd84a, #fff);
-  padding: 1rem;
+body {
+  background: #f4f6f8;
+  color: #222;
 }

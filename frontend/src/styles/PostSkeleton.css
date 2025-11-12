@@ -1,12 +1,12 @@
 .post-skeleton {
   display: inline-block;
   width: 100%;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: var(--color-bg-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
   padding: 15px;
   margin-bottom: 1.5rem;
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn var(--transition-medium);
 }
 
 .skeleton-header {
@@ -18,8 +18,13 @@
 .skeleton-avatar {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+  border-radius: var(--radius-full);
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-gray) 25%,
+    var(--color-bg-muted) 37%,
+    var(--color-bg-gray) 63%
+  );
   background-size: 400% 100%;
   animation: shimmer 1.2s infinite linear;
 }
@@ -30,8 +35,13 @@
 
 .skeleton-line {
   height: 10px;
-  border-radius: 5px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-gray) 25%,
+    var(--color-bg-muted) 37%,
+    var(--color-bg-gray) 63%
+  );
   background-size: 400% 100%;
   animation: shimmer 1.2s infinite linear;
   margin-bottom: 5px;
@@ -47,9 +57,14 @@
 
 .skeleton-body {
   height: 120px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   margin-top: 10px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-gray) 25%,
+    var(--color-bg-muted) 37%,
+    var(--color-bg-gray) 63%
+  );
   background-size: 400% 100%;
   animation: shimmer 1.2s infinite linear;
 }
@@ -58,6 +73,7 @@
   margin-top: 10px;
 }
 
+/* Animations */
 @keyframes shimmer {
   0% {
     background-position: -400px 0;
