@@ -353,7 +353,7 @@
   background: transparent;
   color: var(--color-text-gray);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   font-size: var(--font-sm);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -368,7 +368,7 @@
   background: var(--color-primary);
   color: var(--color-white);
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-xl);
   font-size: var(--font-sm);
   font-weight: 500;
   cursor: pointer;
@@ -396,11 +396,12 @@
 
 .comment-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
   background: var(--color-bg-light);
   padding: 6px 4px;
   border-bottom: 1px solid var(--color-border-light);
+  /* background-color: red; */
 }
 
 .comment-profile-pic img {
