@@ -47,7 +47,7 @@
 /*------------------Upload Label----------------------*/
 .upload-label {
   margin-top: 10px;
-  background: var(--color-accent-blue);
+  background-color: var(--color-accent-blue);
   color: var(--color-white);
   padding: 8px 15px;
   border-radius: var(--radius-md);
@@ -57,7 +57,7 @@
 }
 
 .upload-label:hover {
-  background: var(--color-accent-blue-dark);
+  background-color: var(--color-accent-blue-dark);
 }
 
 .uploading-text {
@@ -92,7 +92,7 @@
   margin-top: 25px;
   width: 100%;
   padding: 10px;
-  background: var(--color-red);
+  background-color: var(--color-red);
   color: var(--color-white);
   font-weight: bold;
   border: none;
@@ -102,7 +102,7 @@
 }
 
 .pro-logout-btn:hover {
-  background: var(--color-red-dark);
+  background-color: var(--color-red-dark);
 }
 
 /*------------------Responsive----------------------*/
