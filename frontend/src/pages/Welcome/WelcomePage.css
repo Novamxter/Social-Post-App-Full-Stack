@@ -1,16 +1,17 @@
-/* ====== General Layout ====== */
+/*------------------General Layout----------------------*/
 .welcome-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(180deg, #f0f4ff, #ffffff);
+  background: linear-gradient(180deg, var(--color-bg-gray), var(--color-bg-light));
   padding: 20px;
   text-align: center;
+  font-family: var(--font-primary);
 }
 
-/* ====== Header Section ====== */
+/*------------------Header Section----------------------*/
 .welcome-header {
   margin-bottom: 40px;
   max-width: 400px;
@@ -23,51 +24,51 @@
 }
 
 .welcome-header h2 {
-  font-size: 1.8rem;
-  color: #1e40af;
+  font-size: var(--font-lg);
+  color: var(--color-primary-dark);
   margin-bottom: 10px;
 }
 
 .welcome-header p {
-  color: #555;
-  font-size: 1rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-md);
   line-height: 1.4;
 }
 
-/* ====== Login Section ====== */
+/*------------------Login Section----------------------*/
 .welcome-login-section {
   width: 100%;
   max-width: 350px;
-  background: #ffffff;
+  background: var(--color-bg-light);
   padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .welcome-login-section h3 {
   font-size: 1.3rem;
-  color: #111;
+  color: var(--color-text);
   margin-bottom: 20px;
 }
 
-/* Google Button */
+/*------------------Google Button----------------------*/
 .google-btn {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   padding: 10px;
-  font-size: 1rem;
+  font-size: var(--font-md);
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all var(--transition-fast);
 }
 
 .google-btn:hover {
-  background: #f9fafb;
+  background: var(--color-bg-gray);
 }
 
 .google-btn img {
@@ -76,40 +77,40 @@
   margin-right: 10px;
 }
 
-/* Other Login Method */
+/*------------------Other Login Method----------------------*/
 .other-method {
   margin: 15px 0;
-  font-size: 0.9rem;
-  color: #777;
+  font-size: var(--font-sm);
+  color: var(--color-text-gray);
 }
 
-/* Email Button */
+/*------------------Email Button----------------------*/
 .email-btn {
   width: 100%;
-  background: #2563eb;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   padding: 10px;
-  font-size: 1rem;
+  font-size: var(--font-md);
   cursor: pointer;
   font-weight: 500;
-  transition: background 0.2s ease-in-out;
+  transition: background-color var(--transition-fast);
 }
 
 .email-btn:hover {
-  background: #1e40af;
+  background: var(--color-primary-dark);
 }
 
-/* Footer Note */
+/*------------------Footer Note----------------------*/
 .footer-note {
   margin-top: 20px;
-  font-size: 0.9rem;
-  color: #666;
+  font-size: var(--font-sm);
+  color: var(--color-text-gray);
   line-height: 1.4;
 }
 
-/* ====== Responsive ====== */
+/*------------------Responsive----------------------*/
 @media (max-width: 480px) {
   .hero-img {
     width: 90px;
@@ -122,12 +123,12 @@
 
   .welcome-login-section {
     padding: 20px;
-    border-radius: 15px;
+    border-radius: var(--radius-md);
   }
 
   .google-btn,
   .email-btn {
-    font-size: 0.95rem;
+    font-size: var(--font-sm);
     padding: 9px;
   }
 }

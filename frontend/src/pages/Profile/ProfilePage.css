@@ -1,17 +1,20 @@
+/*------------------Main Container----------------------*/
 .profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f4f5f7;
+  background: var(--color-bg-gray);
   min-height: 100vh;
+  font-family: var(--font-primary);
 }
 
+/*------------------Profile Card----------------------*/
 .profile-card {
-  background: #fff;
+  background: var(--color-bg-light);
   margin-top: 80px;
   padding: 30px 40px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   width: 90%;
   max-width: 420px;
   text-align: left;
@@ -19,11 +22,13 @@
 
 .profile-card h2 {
   text-align: center;
-  color: #333;
+  color: var(--color-text);
   margin-bottom: 25px;
   font-weight: 600;
+  font-size: var(--font-lg);
 }
 
+/*------------------Profile Picture Section----------------------*/
 .profile-page-pic-container {
   display: flex;
   flex-direction: column;
@@ -34,32 +39,34 @@
 .profile-page-pic {
   width: 120px;
   height: 120px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   object-fit: cover;
-  border: 3px solid #ddd;
+  border: 3px solid var(--color-border);
 }
 
+/*------------------Upload Label----------------------*/
 .upload-label {
   margin-top: 10px;
-  background: #007bff;
-  color: white;
+  background: var(--color-accent-blue);
+  color: var(--color-white);
   padding: 8px 15px;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: background-color var(--transition-fast);
 }
 
 .upload-label:hover {
-  background: #0069d9;
+  background: var(--color-accent-blue-dark);
 }
 
 .uploading-text {
-  color: gray;
-  font-size: 13px;
+  color: var(--color-text-gray);
+  font-size: 0.8rem;
   margin-top: 5px;
 }
 
+/*------------------Profile Info----------------------*/
 .profile-info {
   display: flex;
   flex-direction: column;
@@ -69,30 +76,54 @@
 .profile-field {
   display: flex;
   justify-content: space-between;
-  background: #f9fafc;
+  background: var(--color-bg-muted);
   padding: 12px 16px;
-  border-radius: 10px;
-  font-size: 15px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-md);
 }
 
 .profile-field label {
   font-weight: 600;
-  color: #444;
+  color: var(--color-text-light);
 }
 
+/*------------------Logout Button----------------------*/
 .pro-logout-btn {
   margin-top: 25px;
   width: 100%;
   padding: 10px;
-  background: #ff5757;
-  color: white;
+  background: var(--color-red);
+  color: var(--color-white);
   font-weight: bold;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: background-color var(--transition-fast);
 }
 
 .pro-logout-btn:hover {
-  background: #ff3838;
+  background: var(--color-red-dark);
+}
+
+/*------------------Responsive----------------------*/
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 25px 25px;
+    border-radius: var(--radius-md);
+  }
+
+  .profile-page-pic {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-field {
+    font-size: var(--font-sm);
+    padding: 10px 14px;
+  }
+
+  .upload-label {
+    font-size: var(--font-sm);
+    padding: 7px 12px;
+  }
 }
