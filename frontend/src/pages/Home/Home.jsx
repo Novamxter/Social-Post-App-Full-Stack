@@ -11,7 +11,7 @@ import "../../styles/DashBoard.css";
 export const allowedOrigin =
   import.meta.env.MODE === "production"
     ? "https://social-post-app-full-stack.onrender.com"
-    : "http://192.168.31.17:5000";
+    : "http://192.168.43.7:5000";
 
 function HomePage() {
   const socketRef = useRef(null);

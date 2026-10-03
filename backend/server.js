@@ -12,7 +12,7 @@ dotenv.config();
 const allowedOrigin =
   process.env.NODE_ENV === "production"
     ? "https://social-post-app-full-stack.vercel.app"
-    : "http://192.168.31.17:5173";
+    : "http://192.168.43.7:5173";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -116,4 +116,4 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 5000;
 // app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server running on port ${PORT} `));
-server.listen(PORT, () => console.log(`✅ Server running on port ${PORT} `));
+server.listen(PORT, "0.0.0.0", () => console.log(`✅ Server running on port ${PORT} `));

@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [user, setUser] = useState({ email: "", password: "" });
   const { saveToken, setIsLogout } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [guestLoading, setGuestLoading] = useState(false);
 
   const handleData = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -39,6 +40,34 @@ export default function LoginPage() {
       }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGuestLogin = async () => {
+    setGuestLoading(true);
+    try {
+      const demoCredentials = {
+        email: "demo@gmail.com",
+        password: "123456",
+      };
+
+      const res = await loginUser(demoCredentials);
+
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      saveToken(res.data.accessToken);
+      setIsLogout(false);
+      navigate("/home");
+
+      console.log("Guest login successful:", res.data);
+
+      // Whatever you normally do after login
+      // e.g. save token and navigate
+      // localStorage.setItem("token", res.data.token);
+      // navigate("/home");
+    } catch (error) {
+      console.error("Guest login failed:", error);
+    } finally {
+      setGuestLoading(false);
     }
   };
 
@@ -87,11 +116,12 @@ export default function LoginPage() {
 
       <p className="or">Or</p>
 
+      <button className="guest-btn" onClick={handleGuestLogin} disabled={loading}>
+        {guestLoading ? <div className="spinner"></div> : "Login as Guest"}
+      </button>
+
       <button className="google-btn">
-        <img
-          src="/Images/google.png"
-          alt="Google"
-        />
+        <img src="/Images/google.png" alt="Google" />
         Sign in with Google
       </button>
 
